@@ -8,5 +8,10 @@
 <manifest
     package="org.firstinspires.ftc.teamcode"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <application/>
+    <application>
+        <activity android:name=".sensors.PhoneGyroscope"></activity>
+    </application>
+    <uses-feature
+        android:name="android.hardware.sensor.gyroscope"
+        android:required="true" />
 </manifest>
