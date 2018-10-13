@@ -3,65 +3,67 @@ package org.firstinspires.ftc.teamcode.test_programs;
 /**
  * Created by AshQuinn on 10/13/18.
  */
-        import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-        import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
-        import org.firstinspires.ftc.Tempest_2017_2018.teamcode.DriveTrains.HolonomicDrive;
-        import org.firstinspires.ftc.Tempest_2017_2018.teamcode.Manipulators.Glyph_Arm;
-        import org.firstinspires.ftc.Tempest_2017_2018.teamcode.Robot2017_2018;
-        import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 /**
  * Created by Molly on 9/30/2017.
  */
-@TeleOp
+@TeleOp(name="Holonomic + LinAct Teleop", group="Test")
+//@Disabled
 public class Teleop_6699 extends LinearOpMode {
-    // holonomic drive object instance
-    Robot2017_2018 Robot;
-
-    // sleep fuction
-    public void Sleep(long ticks) throws InterruptedException {
-        long timer = System.currentTimeMillis();
-        while (System.currentTimeMillis() - timer < ticks) {
-            idle();
-        }
-    }
-
     //Testing GitHub push
+    DcMotor NW;
+    DcMotor NE;
+    DcMotor SW;
+    DcMotor SE;
+    DcMotor LinAct;
+
+    DcMotor.RunMode encMode = DcMotor.RunMode.RUN_USING_ENCODER;
 
     @Override
-    public void runOpMode() throws InterruptedException {
-        Robot = new Robot2017_2018(this);
-        Robot.init(hardwareMap);
-
+    public void runOpMode() {
         double theta;
         double power;
         double pivotpower;
-        double state = 0;
-    /*
-    0: zero position
-    0.5: mid position
-    1: top position
-     */
+
         //Scaling factors for speed
         double driveScale = 0.5;
         double turnScale = 0.5;
-
-        Robot.jewelArm.jewelArmUp();
-        boolean JewelArmUp = true; //arm starts up after autonomous
-        boolean open = true; //default is that the grabber moves open
+        double LinActPower = 0.5;
 
         double leftX;
         double leftY;
         double rightX;
 
+        NW = hardwareMap.dcMotor.get("NW");
+        NW.setMode(encMode);
+        NW.setDirection(DcMotor.Direction.FORWARD);
+        NW.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        NE = hardwareMap.dcMotor.get("NE");
+        NE.setMode(encMode);
+        NE.setDirection(DcMotor.Direction.REVERSE);
+        NE.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        SW = hardwareMap.dcMotor.get("SW");
+        SW.setMode(encMode);
+        SW.setDirection(DcMotor.Direction.FORWARD);
+        SW.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        SE = hardwareMap.dcMotor.get("SE");
+        SE.setMode(encMode);
+        SE.setDirection(DcMotor.Direction.REVERSE);
+        SE.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        LinAct = hardwareMap.dcMotor.get("LinAct");
+
         waitForStart();
-        Robot.glyphArm.liftArm.setTargetPosition(Robot.glyphArm.LiftZeroPosition);
-        Robot.glyphArm.liftArm.setPower(0.6);
         while (opModeIsActive()) {
-            leftX = (float)scaleInput(gamepad1.left_stick_x);
-            leftY = (float)scaleInput(gamepad1.left_stick_y);
-            rightX = (float)scaleInput(gamepad1.right_stick_x);
+            leftX = scaleInput(gamepad1.left_stick_x);
+            leftY = scaleInput(gamepad1.left_stick_y);
+            rightX = scaleInput(gamepad1.right_stick_x);
 
             //Define angle for pan function by using trigonometry to calculate it from joystick
             theta = -Math.PI / 4 + Math.atan2(-leftY, -leftX);
@@ -95,98 +97,56 @@ public class Teleop_6699 extends LinearOpMode {
 
             if (power > 0.01) {
                 //Power restrictions are so that random slightly-incorrect resets don't move the robot
-                Robot.holoDrive.pan(theta, power * driveScale);
+                pan(theta, power * driveScale);
             } else if (Math.abs(pivotpower) > 0.1) {
                 //Only turn it if it isn't driving
-                Robot.holoDrive.NE.setPower(pivotpower * turnScale);
-                Robot.holoDrive.SE.setPower(pivotpower * turnScale);
-                Robot.holoDrive.NW.setPower(-pivotpower * turnScale);
-                Robot.holoDrive.SW.setPower(-pivotpower * turnScale);
+                NE.setPower(pivotpower * turnScale);
+                SE.setPower(pivotpower * turnScale);
+                NW.setPower(-pivotpower * turnScale);
+                SW.setPower(-pivotpower * turnScale);
             } else {
                 //Otherwise, don't move
-                Robot.holoDrive.stopmotors();
-            }
-            /*
-            float FrontLeft = (float)(-leftY + leftX - rightX);
-            float FrontRight = (float)(leftY + leftX - rightX);
-            float BackRight = (float)(leftY - leftX - rightX);
-            float BackLeft = (float)(-leftY - leftX - rightX);
-
-            // clip the right/left values so that the values never exceed +/- 1
-            FrontRight = Range.clip(FrontRight, -1, 1);
-            FrontLeft = Range.clip(FrontLeft, -1, 1);
-            BackLeft = Range.clip(BackLeft, -1, 1);
-            BackRight = Range.clip(BackRight, -1, 1);
-
-            // write the values to the motors
-            Robot.holoDrive.NE.setPower(-FrontRight*driveScale);
-            Robot.holoDrive.NW.setPower(FrontLeft*driveScale);
-            Robot.holoDrive.SW.setPower(BackLeft*driveScale);
-            Robot.holoDrive.SE.setPower(-BackRight*driveScale);
-
-            */
-
-            //Move Jewel Arm
-            if (gamepad1.dpad_left) {
-                //Moves the jewel arm up and down with a toggle
-                if (!JewelArmUp) {
-                    Robot.jewelArm.jewelArmUp();
-                    JewelArmUp = true;
-                } else {
-                    Robot.jewelArm.jewelArmDown();
-                    JewelArmUp = false;
-                }
-                while (gamepad1.dpad_left) {
-                    idle();
-                }
-            }
-
-            if (gamepad1.left_trigger > 0.2 && gamepad1.right_trigger < 0.2 && !gamepad1.dpad_down) {
-                Robot.glyphArm.release();
-            } else if (gamepad1.left_trigger < 0.2 && gamepad1.right_trigger > 0.2 && !gamepad1.dpad_down) {
-                Robot.glyphArm.grab();
-                open = false;
-            } else if (gamepad1.left_trigger < 0.2 && gamepad1.right_trigger < 0.2 && gamepad1.dpad_down) {
-                Robot.glyphArm.sortOfRelease();
-            }
-
-            if (gamepad1.left_bumper) {
-                //Moves the left grabber, only if the button is being held
-                Robot.glyphArm.leftGrab();
-                open = true;
-            } else if (open) {
-                Robot.glyphArm.leftRelease();
-            }
-
-            if (gamepad1.right_bumper) {
-                //Moves the right bumper, only if the button is being held
-                Robot.glyphArm.rightGrab();
-                open = true;
-            } else if (open) {
-                Robot.glyphArm.rightRelease();
+                stopmotors();
             }
 
             if (gamepad1.a) {
-                //Moves to the zero position. Extra math stuff is designed so that it won't move if it's there or almost there.
-                state = 0;
-                Robot.glyphArm.liftArm.setTargetPosition(Robot.glyphArm.LiftZeroPosition);
-
-            } else if (gamepad1.b) {
-                //Moves to the middle position. Extra math stuff is designed so that it won't move if it's there or almost there.
-                state = 0.5;
-                Robot.glyphArm.liftArm.setTargetPosition(Robot.glyphArm.LiftMidPosition);
-
+                LinAct.setPower(-LinActPower);
             } else if (gamepad1.y) {
-                //Moves to the zero position. Extra math stuff is designed so that it won't move if it's there or almost there.
-                state = 1;
-                Robot.glyphArm.liftArm.setTargetPosition(Robot.glyphArm.LiftTopPosition);
-
-            } else if (gamepad1.x) {
-                Robot.glyphArm.incrementPosition(this);
+                LinAct.setPower(LinActPower);
             } else {
+                LinAct.setPower(0);
             }
         }
     }
+
+    void pan(double theta, double power) {
+        //This is the pan function. If it is given an angle, it will move the robot at that angle.
+        if (power <= 1 && power >= -1) {
+            NW.setPower(-power*Math.cos(theta));
+            SE.setPower(-power*Math.cos(theta));
+            NE.setPower(-power*Math.sin(theta));
+            SW.setPower(-power*Math.sin(theta));
+        } else if (power>1) {
+            //If it is given a power outside of the allowable range, it will adjust to be within an allowable range
+            NW.setPower(-1*Math.cos(theta));
+            SE.setPower(-1*Math.cos(theta));
+            NE.setPower(-1*Math.sin(theta));
+            SW.setPower(-1*Math.sin(theta));
+        } else {
+            NW.setPower(1*Math.cos(theta));
+            SE.setPower(1*Math.cos(theta));
+            NE.setPower(1*Math.sin(theta));
+            SW.setPower(1*Math.sin(theta));
+        }
+    }
+
+    void stopmotors() {
+        NW.setPower(0);
+        NE.setPower(0);
+        SW.setPower(0);
+        SE.setPower(0);
+    }
+
     double scaleInput(double dVal)  {
         double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
                 0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };

@@ -12,7 +12,6 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 @TeleOp(name="LinearActTest", group="Test")
 //@Disabled
-
 public class LinearActTest extends LinearOpMode {
     public DcMotor LinAct;
     double Power = 0.5;
@@ -29,7 +28,6 @@ public class LinearActTest extends LinearOpMode {
             } else {
                 LinAct.setPower(0);
             }
-
         }
     }
 
