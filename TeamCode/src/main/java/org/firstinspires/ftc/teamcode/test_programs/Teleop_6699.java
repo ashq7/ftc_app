@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode.test_programs;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import org.firstinspires.ftc.teamcode.Manipulators.GrabArm;
 
 /**
  * Created by Molly on 9/30/2017.
@@ -75,7 +76,7 @@ public class Teleop_6699 extends LinearOpMode {
             telemetry.addData("JoyStickX", gamepad1.left_stick_x);
             telemetry.addData("ScaledX", leftX);
             telemetry.addData("JoyStickY", gamepad1.left_stick_y);
-            telemetry.addData("ScaledY",leftY);
+            telemetry.addData("ScaledY", leftY);
             //telemetry.addData("Power", power);
             telemetry.update();
             if (gamepad1.dpad_up) {
@@ -122,21 +123,21 @@ public class Teleop_6699 extends LinearOpMode {
     void pan(double theta, double power) {
         //This is the pan function. If it is given an angle, it will move the robot at that angle.
         if (power <= 1 && power >= -1) {
-            NW.setPower(-power*Math.cos(theta));
-            SE.setPower(-power*Math.cos(theta));
-            NE.setPower(-power*Math.sin(theta));
-            SW.setPower(-power*Math.sin(theta));
-        } else if (power>1) {
+            NW.setPower(-power * Math.cos(theta));
+            SE.setPower(-power * Math.cos(theta));
+            NE.setPower(-power * Math.sin(theta));
+            SW.setPower(-power * Math.sin(theta));
+        } else if (power > 1) {
             //If it is given a power outside of the allowable range, it will adjust to be within an allowable range
-            NW.setPower(-1*Math.cos(theta));
-            SE.setPower(-1*Math.cos(theta));
-            NE.setPower(-1*Math.sin(theta));
-            SW.setPower(-1*Math.sin(theta));
+            NW.setPower(-1 * Math.cos(theta));
+            SE.setPower(-1 * Math.cos(theta));
+            NE.setPower(-1 * Math.sin(theta));
+            SW.setPower(-1 * Math.sin(theta));
         } else {
-            NW.setPower(1*Math.cos(theta));
-            SE.setPower(1*Math.cos(theta));
-            NE.setPower(1*Math.sin(theta));
-            SW.setPower(1*Math.sin(theta));
+            NW.setPower(1 * Math.cos(theta));
+            SE.setPower(1 * Math.cos(theta));
+            NE.setPower(1 * Math.sin(theta));
+            SW.setPower(1 * Math.sin(theta));
         }
     }
 
@@ -147,9 +148,9 @@ public class Teleop_6699 extends LinearOpMode {
         SE.setPower(0);
     }
 
-    double scaleInput(double dVal)  {
-        double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
-                0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
+    double scaleInput(double dVal) {
+        double[] scaleArray = {0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
+                0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00};
 
         // get the corresponding index for the scaleInput array.
         int index = (int) (dVal * 16.0);
@@ -174,5 +175,17 @@ public class Teleop_6699 extends LinearOpMode {
 
         // return scaled value.
         return dScale;
+    }
+
+    public void grab() {
+        //Grabs a block
+        grabArmLeft.setPosition(0.488);
+        grabArmRight.setPosition(0.371);
+    }
+
+    public void release() {
+        //Releases the block
+        grabArmLeft.setPosition(0.82);
+        grabArmRight.setPosition(0.059);
     }
 }
