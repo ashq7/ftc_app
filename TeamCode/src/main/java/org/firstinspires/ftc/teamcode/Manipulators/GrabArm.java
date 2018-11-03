@@ -13,6 +13,8 @@ public class GrabArm {
     public Servo grabArmRight; //servo right
     public Servo grabArmLeft; //servo left
 
+    private HardwareMap HWMap;
+
     public GrabArm () {
     }
     public void init (HardwareMap newHWMap){
@@ -23,5 +25,8 @@ public class GrabArm {
 
     }
 
+    void release(){
+
+    }
 
 }

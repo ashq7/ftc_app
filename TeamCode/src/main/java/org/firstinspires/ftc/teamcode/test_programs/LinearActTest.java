@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by AshQuinn on 10/6/18.
  */
 @TeleOp(name="LinearActTest", group="Test")
-//@Disabled
+@Disabled
 public class LinearActTest extends LinearOpMode {
     public DcMotor LinAct;
     double Power = 0.5;

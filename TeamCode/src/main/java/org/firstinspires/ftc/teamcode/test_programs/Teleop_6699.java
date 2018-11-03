@@ -177,15 +177,15 @@ public class Teleop_6699 extends LinearOpMode {
         return dScale;
     }
 
-    public void grab() {
-        //Grabs a block
-        grabArmLeft.setPosition(0.488);
-        grabArmRight.setPosition(0.371);
-    }
-
-    public void release() {
-        //Releases the block
-        grabArmLeft.setPosition(0.82);
-        grabArmRight.setPosition(0.059);
-    }
+//    public void grab() {
+//        //Grabs a block
+//        grabArmLeft.setPosition(0.488);
+//        grabArmRight.setPosition(0.371);
+//    }
+//
+//    public void release() {
+//        //Releases the block
+//        grabArmLeft.setPosition(0.82);
+//        grabArmRight.setPosition(0.059);
+//    }
 }
