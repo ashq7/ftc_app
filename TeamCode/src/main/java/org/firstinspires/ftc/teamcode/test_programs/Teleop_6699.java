@@ -6,6 +6,8 @@ package org.firstinspires.ftc.teamcode.test_programs;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
 import org.firstinspires.ftc.teamcode.Manipulators.GrabArm;
 
 /**
@@ -22,6 +24,7 @@ public class Teleop_6699 extends LinearOpMode {
     DcMotor LinAct;
 
     DcMotor.RunMode encMode = DcMotor.RunMode.RUN_USING_ENCODER;
+    DcMotor.RunMode dumbMode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 
     @Override
     public void runOpMode() {
@@ -39,23 +42,23 @@ public class Teleop_6699 extends LinearOpMode {
         double rightX;
 
         NW = hardwareMap.dcMotor.get("NW");
-        NW.setMode(encMode);
-        NW.setDirection(DcMotor.Direction.FORWARD);
+        NW.setMode(dumbMode);
+        NW.setDirection(DcMotor.Direction.REVERSE);
         NW.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         NE = hardwareMap.dcMotor.get("NE");
-        NE.setMode(encMode);
-        NE.setDirection(DcMotor.Direction.REVERSE);
+        NE.setMode(dumbMode);
+        NE.setDirection(DcMotor.Direction.FORWARD);
         NE.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         SW = hardwareMap.dcMotor.get("SW");
-        SW.setMode(encMode);
-        SW.setDirection(DcMotor.Direction.FORWARD);
+        SW.setMode(dumbMode);
+        SW.setDirection(DcMotor.Direction.REVERSE);
         SW.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         SE = hardwareMap.dcMotor.get("SE");
-        SE.setMode(encMode);
-        SE.setDirection(DcMotor.Direction.REVERSE);
+        SE.setMode(dumbMode);
+        SE.setDirection(DcMotor.Direction.FORWARD);
         SE.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         LinAct = hardwareMap.dcMotor.get("LinAct");
