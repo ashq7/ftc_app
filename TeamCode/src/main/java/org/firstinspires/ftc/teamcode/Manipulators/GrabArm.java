@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Manipulators;
 
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -13,20 +14,48 @@ public class GrabArm {
     public Servo grabArmRight; //servo right
     public Servo grabArmLeft; //servo left
 
+    private double rightOpen = 0.5;
+    private double rightClosed =1;
+    private double leftOpen =0.5;
+    private double leftClosed =0;
+    private double power = 0.5;
+
     private HardwareMap HWMap;
 
-    public GrabArm () {
-    }
-    public void init (HardwareMap newHWMap){
+    public GrabArm (HardwareMap newHWMap) {
         HWMap = newHWMap;
+    }
+    public void init (){
+
         grabArmLeft = HWMap.servo.get("grabArmLeft");
         grabArmRight = HWMap.servo.get("grabArmRight");
+        liftArm = HWMap.dcMotor.get("liftArm");
         release();
 
     }
 
-    void release(){
+    public void raise () {
+        liftArm.setPower(power);
+    }
 
+    public void lower () {
+        liftArm.setPower(-power);
+    }
+
+    public void stopLiftArm (){
+        liftArm.setPower(0);
+    }
+
+    public void grab() {
+//       Grabs a block
+        grabArmLeft.setPosition(leftClosed);
+        grabArmRight.setPosition(rightClosed);
+    }
+
+    public void release() {
+        //Releases the block
+        grabArmLeft.setPosition(leftOpen);
+        grabArmRight.setPosition(rightOpen);
     }
 
 }

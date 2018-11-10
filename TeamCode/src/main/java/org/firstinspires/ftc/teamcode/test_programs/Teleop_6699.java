@@ -61,7 +61,7 @@ public class Teleop_6699 extends LinearOpMode {
         SE.setDirection(DcMotor.Direction.FORWARD);
         SE.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        LinAct = hardwareMap.dcMotor.get("LinAct");
+        LinAct = hardwareMap.dcMotor.get("linAct");
 
         waitForStart();
         while (opModeIsActive()) {
@@ -179,6 +179,7 @@ public class Teleop_6699 extends LinearOpMode {
         // return scaled value.
         return dScale;
     }
+
 
 //    public void grab() {
 //        //Grabs a block

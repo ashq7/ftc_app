@@ -1,0 +1,87 @@
+package org.firstinspires.ftc.teamcode.programs;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.teamcode.Manipulators.GrabArm;
+import org.firstinspires.ftc.teamcode.Manipulators.LinAct;
+import org.firstinspires.ftc.teamcode.drive_trains.HolonomicDrive;
+
+/**
+ * Created by AshQuinn on 11/9/18.
+ */
+
+@TeleOp (name = "Teleop", group = "Actual")
+public class Teleop extends LinearOpMode {
+    LinAct linAct;
+    HolonomicDrive driveTrain;
+    GrabArm grabArm;
+
+    @Override
+    public void runOpMode () {
+        linAct = new LinAct(hardwareMap);
+        driveTrain = new HolonomicDrive(hardwareMap);
+        grabArm = new GrabArm(hardwareMap);
+        linAct.init();
+        driveTrain.init();
+        grabArm.init();
+
+        waitForStart();
+        while (opModeIsActive()){
+            double leftX = gamepad1.left_stick_x;
+            double leftY = gamepad1.left_stick_y;
+            double rightX = gamepad1.right_stick_x;
+
+            //Define angle for pan function by using trigonometry to calculate it from joystick
+            double theta = -Math.PI / 4 + Math.atan2(-leftY, -leftX);
+            //Define power for pan function by using math to calculate the length of the hypotenuse between the x and y axes
+            double power = Math.pow(Math.sqrt((leftX) * (leftX) + (leftY) * (leftY)), 3);
+            //Define power for turning, based solely on the x and y axes
+            double pivotpower = -rightX;
+
+            //pan and turn
+            if (power >0.1) {
+                driveTrain.pan(theta, power);
+            }
+            else if (pivotpower>0.1){
+                driveTrain.turn (power);
+            }
+            else {
+                driveTrain.stop();
+            }
+
+            //lower and raise Linear Actuator, the rover lifter
+            if (gamepad1.y) {
+                linAct.lower ();
+            }
+            else if (gamepad1.x) {
+                linAct.raise();
+            }
+            else {
+                linAct.stop();
+            }
+
+            //lower and raise grab arm
+            if (gamepad1.right_bumper){
+                grabArm.lower();
+            }
+            else if (gamepad1.left_bumper){
+                grabArm.raise();
+            }
+            else {
+                grabArm.stopLiftArm();
+            }
+
+            //open and close grabbers
+            if (gamepad1.a){
+                grabArm.grab();
+            }
+            else if (gamepad1.b){
+                grabArm.release();
+            }
+        }
+    }
+
+
+}
