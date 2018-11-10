@@ -14,9 +14,9 @@ public class GrabArm {
     public Servo grabArmRight; //servo right
     public Servo grabArmLeft; //servo left
 
-    private double rightOpen = 0.5;
+    private double rightOpen = 0.6;
     private double rightClosed = 1;
-    private double leftOpen = 0.5;
+    private double leftOpen = 0.4;
     private double leftClosed = 0;
     private double raisePower = 0.25;
     private double lowerPower = -0.1;
