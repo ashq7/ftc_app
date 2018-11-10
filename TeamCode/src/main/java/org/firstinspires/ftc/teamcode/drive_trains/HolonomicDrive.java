@@ -52,15 +52,15 @@ public class HolonomicDrive {
             SW.setPower(-power * Math.sin(theta));
         } else if (power > 1) {
             //If it is given a power outside of the allowable range, it will adjust to be within an allowable range
-            NW.setPower(-1 * Math.cos(theta));
-            SE.setPower(-1 * Math.cos(theta));
-            NE.setPower(-1 * Math.sin(theta));
-            SW.setPower(-1 * Math.sin(theta));
+            NW.setPower(-Math.cos(theta));
+            SE.setPower(-Math.cos(theta));
+            NE.setPower(-Math.sin(theta));
+            SW.setPower(-Math.sin(theta));
         } else {
-            NW.setPower(1 * Math.cos(theta));
-            SE.setPower(1 * Math.cos(theta));
-            NE.setPower(1 * Math.sin(theta));
-            SW.setPower(1 * Math.sin(theta));
+            NW.setPower(Math.cos(theta));
+            SE.setPower(Math.cos(theta));
+            NE.setPower(Math.sin(theta));
+            SW.setPower(Math.sin(theta));
         }
     }
     public void turn (double power){

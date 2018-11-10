@@ -18,6 +18,9 @@ public class Teleop extends LinearOpMode {
     HolonomicDrive driveTrain;
     GrabArm grabArm;
 
+    double powerScale = 0.5;
+    double turnScale = 0.5;
+
     @Override
     public void runOpMode () {
         linAct = new LinAct(hardwareMap);
@@ -40,12 +43,17 @@ public class Teleop extends LinearOpMode {
             //Define power for turning, based solely on the x and y axes
             double pivotpower = -rightX;
 
+            telemetry.addData("Theta", theta);
+            telemetry.addData("Power", power);
+            telemetry.addData("Turn Power", pivotpower);
+            telemetry.update();
+
             //pan and turn
-            if (power >0.1) {
-                driveTrain.pan(theta, power);
+            if (Math.abs(power) > 0.1) {
+                driveTrain.pan(theta, power * powerScale);
             }
-            else if (pivotpower>0.1){
-                driveTrain.turn (power);
+            else if (Math.abs(pivotpower) > 0.1) {
+                driveTrain.turn(pivotpower * turnScale);
             }
             else {
                 driveTrain.stop();

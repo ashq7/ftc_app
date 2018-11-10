@@ -15,31 +15,31 @@ public class GrabArm {
     public Servo grabArmLeft; //servo left
 
     private double rightOpen = 0.5;
-    private double rightClosed =1;
-    private double leftOpen =0.5;
-    private double leftClosed =0;
-    private double power = 0.5;
+    private double rightClosed = 1;
+    private double leftOpen = 0.5;
+    private double leftClosed = 0;
+    private double raisePower = 0.25;
+    private double lowerPower = -0.1;
 
     private HardwareMap HWMap;
 
     public GrabArm (HardwareMap newHWMap) {
         HWMap = newHWMap;
     }
-    public void init (){
 
+    public void init (){
         grabArmLeft = HWMap.servo.get("grabArmLeft");
         grabArmRight = HWMap.servo.get("grabArmRight");
         liftArm = HWMap.dcMotor.get("liftArm");
         release();
-
     }
 
     public void raise () {
-        liftArm.setPower(power);
+        liftArm.setPower(raisePower);
     }
 
     public void lower () {
-        liftArm.setPower(-power);
+        liftArm.setPower(lowerPower);
     }
 
     public void stopLiftArm (){
