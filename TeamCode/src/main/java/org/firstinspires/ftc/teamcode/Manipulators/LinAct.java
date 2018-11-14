@@ -18,10 +18,10 @@ public class LinAct {
         linAct = hardwareMap.dcMotor.get("linAct");
     }
 
-    public void raise () {
+    public void extend() {
         linAct.setPower(Power);
     }
-    public void lower () {
+    public void retract() {
         linAct.setPower(-Power);
     }
     public void stop () {

@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.programs;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Manipulators.GrabArm;
 import org.firstinspires.ftc.teamcode.Manipulators.LinAct;
@@ -59,18 +58,18 @@ public class Teleop extends LinearOpMode {
                 driveTrain.stop();
             }
 
-            //lower and raise Linear Actuator, the rover lifter
+            //retract and extend Linear Actuator, the rover lifter
             if (gamepad1.y) {
-                linAct.lower ();
+                linAct.retract();
             }
             else if (gamepad1.x) {
-                linAct.raise();
+                linAct.extend();
             }
             else {
                 linAct.stop();
             }
 
-            //lower and raise grab arm
+            //retract and extend grab arm
             if (gamepad1.right_bumper){
                 grabArm.lower();
             }
