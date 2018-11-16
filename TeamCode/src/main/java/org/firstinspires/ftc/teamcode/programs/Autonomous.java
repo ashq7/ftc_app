@@ -26,6 +26,6 @@ public class Autonomous extends LinearOpMode{
         sleep(4250);
 
         linAct.stop();
-        }
     }
+}
 
