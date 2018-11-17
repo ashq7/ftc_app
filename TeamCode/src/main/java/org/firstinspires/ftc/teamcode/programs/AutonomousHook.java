@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.drive_trains.HolonomicDrive;
  * Created by AshQuinn on 11/16/18.
  */
 
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous
 public class AutonomousHook extends LinearOpMode {
 
     LinAct linAct;
@@ -22,12 +23,10 @@ public class AutonomousHook extends LinearOpMode {
         linAct.init();
         driveTrain.init();
 
-
-
         waitForStart();
 
         linAct.extend();
-        sleep(8200);
+        sleep(9000);
 
         linAct.stop();
 

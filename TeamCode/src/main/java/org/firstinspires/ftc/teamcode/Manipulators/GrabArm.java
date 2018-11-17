@@ -22,7 +22,7 @@ public class GrabArm {
     private double raisePower = 0.25;
     private double lowerPower = -0.1;
 
-    private double open = 0;
+    private double open = 0.4;
     private double closed = 1;
 
     private HardwareMap HWMap;
@@ -58,6 +58,10 @@ public class GrabArm {
         //Releases the block
         grabber.setPosition(open);
 
+    }
+
+    public void midway(){
+        grabber.setPosition(0.4);
     }
 
 }

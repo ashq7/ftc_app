@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.programs;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.Manipulators.GrabArm;
 import org.firstinspires.ftc.teamcode.Manipulators.LinAct;
 import org.firstinspires.ftc.teamcode.drive_trains.HolonomicDrive;
 
@@ -10,25 +11,28 @@ import org.firstinspires.ftc.teamcode.drive_trains.HolonomicDrive;
  */
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous
-public class AutonomousCrater extends LinearOpMode {
+public class AutonomousOpposite extends LinearOpMode {
 
     LinAct linAct;
     HolonomicDrive driveTrain;
+    GrabArm grabArm;
     double power = 0.25;
 
     @Override
     public void runOpMode () throws InterruptedException {
         linAct = new LinAct(hardwareMap);
         driveTrain = new HolonomicDrive(hardwareMap);
+        grabArm = new GrabArm(hardwareMap);
         linAct.init();
         driveTrain.init();
-
-
+        grabArm.init();
 
         waitForStart();
 
+        grabArm.midway();
+
         linAct.extend();
-        sleep(8200);
+        sleep(9000);
 
         linAct.stop();
 
@@ -53,5 +57,7 @@ public class AutonomousCrater extends LinearOpMode {
         sleep(2000);
 
         driveTrain.stop();
+
+        grabArm.release();
     }
 }
