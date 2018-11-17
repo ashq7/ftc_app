@@ -33,6 +33,7 @@ public class AutonomousZone extends LinearOpMode{
 
         linAct.stop();
 
+
         sleep(2000);
 
         //off hook (west)
@@ -47,6 +48,7 @@ public class AutonomousZone extends LinearOpMode{
         sleep (2000);
 
         driveTrain.stop();
-        }
     }
+}
+
 
