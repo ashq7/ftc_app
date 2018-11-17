@@ -11,15 +11,19 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class GrabArm {
     public DcMotor liftArm; //arm to lift the grabbers
-    public Servo grabArmRight; //servo right
-    public Servo grabArmLeft; //servo left
+    public Servo grabber;
+    /*public Servo grabArmRight; //servo right
+    public Servo grabArmLeft; //servo left*/
 
-    private double rightOpen = 0.6;
+    /*private double rightOpen = 0.6;
     private double rightClosed = 1;
     private double leftOpen = 0.4;
-    private double leftClosed = 0;
+    private double leftClosed = 0;*/
     private double raisePower = 0.25;
     private double lowerPower = -0.1;
+
+    private double open = 0;
+    private double closed = 1;
 
     private HardwareMap HWMap;
 
@@ -28,8 +32,7 @@ public class GrabArm {
     }
 
     public void init (){
-        grabArmLeft = HWMap.servo.get("grabArmLeft");
-        grabArmRight = HWMap.servo.get("grabArmRight");
+        grabber = HWMap.servo.get("grabArmRight");
         liftArm = HWMap.dcMotor.get("liftArm");
         release();
     }
@@ -48,14 +51,13 @@ public class GrabArm {
 
     public void grab() {
 //       Grabs a block
-        grabArmLeft.setPosition(leftClosed);
-        grabArmRight.setPosition(rightClosed);
+        grabber.setPosition(closed);
     }
 
     public void release() {
         //Releases the block
-        grabArmLeft.setPosition(leftOpen);
-        grabArmRight.setPosition(rightOpen);
+        grabber.setPosition(open);
+
     }
 
 }
