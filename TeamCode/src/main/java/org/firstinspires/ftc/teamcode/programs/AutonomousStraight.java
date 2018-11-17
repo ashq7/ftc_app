@@ -32,12 +32,6 @@ public class AutonomousStraight extends LinearOpMode{
 
         grabArm.midway();
 
-        grabArm.raise();
-        sleep(1000);
-        
-
-
-
 
         linAct.extend();
         sleep(9000);
@@ -54,11 +48,17 @@ public class AutonomousStraight extends LinearOpMode{
 
         sleep(500);
 
-        driveTrain.turn(power); //positive power turns clockwise
-        sleep (2000);
+        //out of pole's way (north)
+        driveTrain.pan(((Math.PI/4)-0.2), power);
+        sleep (5000);
+        driveTrain.stop();
+        grabArm.release();
 
-        driveTrain.pan(7*Math.PI/4, power);
-        sleep(7000);
+        driveTrain.pan(5*Math.PI/4, power);
+        sleep(1000);
+        driveTrain.stop();
+
+        driveTrain.pan(Math.PI/4, power);
         driveTrain.stop();
     }
 }
