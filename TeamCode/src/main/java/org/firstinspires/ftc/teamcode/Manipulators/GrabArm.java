@@ -61,7 +61,7 @@ public class GrabArm {
     }
 
     public void midway(){
-        grabber.setPosition(0.4);
+        grabber.setPosition(0.2);
     }
 
 }

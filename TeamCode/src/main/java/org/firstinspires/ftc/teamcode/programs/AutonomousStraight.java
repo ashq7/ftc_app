@@ -14,6 +14,7 @@ import org.firstinspires.ftc.teamcode.drive_trains.HolonomicDrive;
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous
 public class AutonomousStraight extends LinearOpMode{
 
+    //declaring manipulators and variables
     LinAct linAct;
     HolonomicDrive driveTrain;
     GrabArm grabArm;
@@ -21,6 +22,7 @@ public class AutonomousStraight extends LinearOpMode{
 
     @Override
     public void runOpMode () throws InterruptedException {
+        //allocation and initialization
         linAct = new LinAct(hardwareMap);
         driveTrain = new HolonomicDrive(hardwareMap);
         grabArm = new GrabArm(hardwareMap);
@@ -30,36 +32,52 @@ public class AutonomousStraight extends LinearOpMode{
 
         waitForStart();
 
+        //grab arm servo closes around team marker
         grabArm.midway();
 
+        //lift grab arm to avoid drag
+        grabArm.raise();
+        sleep(500);
+        grabArm.stopLiftArm();
 
+        //lowering robot using Linear Actuator
         linAct.extend();
-        sleep(9000);
-
+        sleep(8800);
         linAct.stop();
 
-
+        //pause
         sleep(2000);
 
-        //off hook (west)
+        //drive off hook (west)
         driveTrain.pan(7*Math.PI/4, power);
         sleep(500);
         driveTrain.stop();
 
+        //pause
         sleep(500);
 
-        //out of pole's way (north)
-        driveTrain.pan(((Math.PI/4)-0.2), power);
+
+
+        //towards corner - either corner goal or crater (north)
+        driveTrain.pan(Math.PI/4, power);
         sleep (5000);
         driveTrain.stop();
+
+        //lower grabber
+        grabArm.lower();
+        sleep(500);
+        grabArm.stopLiftArm();
+
+        //open grabber
         grabArm.release();
 
+        //pan backwards to deploy marker
         driveTrain.pan(5*Math.PI/4, power);
         sleep(1000);
         driveTrain.stop();
 
-        driveTrain.pan(Math.PI/4, power);
-        driveTrain.stop();
+        /*driveTrain.pan(Math.PI/4, power);
+        driveTrain.stop();*/
     }
 }
 

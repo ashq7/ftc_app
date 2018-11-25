@@ -26,7 +26,7 @@ public class AutonomousHook extends LinearOpMode {
         waitForStart();
 
         linAct.extend();
-        sleep(9000);
+        sleep(8900);
 
         linAct.stop();
 
