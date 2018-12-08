@@ -34,7 +34,7 @@ public class GrabArm {
     public void init (){
         grabber = HWMap.servo.get("grabArmRight");
         liftArm = HWMap.dcMotor.get("liftArm");
-        release();
+        initial();
     }
 
     public void raise () {
@@ -58,6 +58,10 @@ public class GrabArm {
         //Releases the block
         grabber.setPosition(open);
 
+    }
+    public void initial(){
+        //initialize position to fit in 18 inches
+        grabber.setPosition(0);
     }
 
     public void midway(){
