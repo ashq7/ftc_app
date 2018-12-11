@@ -7,11 +7,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 public class ExampleMultithreadOpmode extends LinearOpMode {
     @Override
     public void runOpMode() {
-        int counter_val = 0;
-        ExampleThread counter = new ExampleThread(counter_val);
+        ExampleThread counter = new ExampleThread(this);
 
         waitForStart();
         counter.start();
+        int counter_val = counter.getCounter();
 
         while (opModeIsActive() && counter_val < 10) {
             telemetry.addData("Main Counter Value", counter_val);

@@ -2,16 +2,20 @@ package org.firstinspires.ftc.teamcode.test_programs;
 
 import android.os.SystemClock;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
 public class ExampleThread extends Thread {
     private int counter;
+    private LinearOpMode parent;
 
-    public ExampleThread (int starting_val) {
-        counter = starting_val;
+    public ExampleThread (LinearOpMode parent) {
+        counter = 0;
+        this.parent = parent;
     }
 
     @Override
     public void run() {
-        while (true) {
+        while (parent.opModeIsActive()) {
             UpdateCounter();
         }
     }
