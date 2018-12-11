@@ -18,7 +18,7 @@ public class ServoLinActTest extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        SmallLinAct = hardwareMap.servo.get("SmallLinAct");
+        SmallLinAct = hardwareMap.crservo.get("SmallLinAct");
         waitForStart();
         while (opModeIsActive()) {
             if (gamepad1.a) {

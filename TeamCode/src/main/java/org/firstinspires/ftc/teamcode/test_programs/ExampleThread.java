@@ -2,23 +2,17 @@ package org.firstinspires.ftc.teamcode.test_programs;
 
 import android.os.SystemClock;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 public class ExampleThread extends Thread {
-    private Telemetry telemetry;
     private int counter;
 
-    public ExampleThread(Telemetry telemetry) {
-        this.telemetry = telemetry;
-        counter = 0;
+    public ExampleThread (int starting_val) {
+        counter = starting_val;
     }
 
     @Override
     public void run() {
         while (true) {
             UpdateCounter();
-            telemetry.addData("Thread Status", counter);
-            telemetry.update();
         }
     }
 
@@ -31,5 +25,5 @@ public class ExampleThread extends Thread {
         }
     }
 
-    public int GetCounter() { return counter; }
+    public int getCounter() { return counter; }
 }
