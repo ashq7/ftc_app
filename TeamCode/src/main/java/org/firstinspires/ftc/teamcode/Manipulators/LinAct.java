@@ -10,21 +10,25 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class LinAct {
     public DcMotor linAct;
     double Power = 0.5;
+    int Retract = 0;
+    int Extend = 3000;
     public HardwareMap hardwareMap;
     public LinAct (HardwareMap HWMap){
         hardwareMap = HWMap;
     }
     public void init () {
         linAct = hardwareMap.dcMotor.get("linAct");
+        linAct.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Retract = linAct.getCurrentPosition();
+        Extend = Retract + Extend;
+        retract();
+        linAct.setPower(Power);
     }
 
     public void extend() {
-        linAct.setPower(Power);
+        linAct.setTargetPosition(Extend);
     }
     public void retract() {
-        linAct.setPower(-Power);
-    }
-    public void stop () {
-        linAct.setPower(0);
+        linAct.setTargetPosition(Retract);
     }
 }
