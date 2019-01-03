@@ -12,15 +12,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class GrabArm {
     public DcMotor liftArm; //arm to lift the grabbers
     public Servo grabber;
-    /*public Servo grabArmRight; //servo right
-    public Servo grabArmLeft; //servo left*/
 
-    /*private double rightOpen = 0.6;
-    private double rightClosed = 1;
-    private double leftOpen = 0.4;
-    private double leftClosed = 0;*/
-    private double raisePower = 0.25;
-    private double lowerPower = -0.1;
+    private double raisePower = 0.4;
+    private double lowerPower = -0.4;
 
     private double open = 0.4;
     private double closed = 1;
