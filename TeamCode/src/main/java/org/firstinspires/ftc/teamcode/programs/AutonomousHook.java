@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.programs;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 
 import org.firstinspires.ftc.teamcode.Manipulators.LinAct;
 import org.firstinspires.ftc.teamcode.drive_trains.HolonomicDrive;
@@ -22,6 +23,7 @@ public class AutonomousHook extends LinearOpMode {
         driveTrain = new HolonomicDrive(hardwareMap);
         linAct.init();
         driveTrain.init();
+        GyroSensor g;
 
         waitForStart();
 
