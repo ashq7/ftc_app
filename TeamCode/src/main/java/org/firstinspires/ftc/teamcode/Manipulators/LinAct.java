@@ -31,4 +31,7 @@ public class LinAct {
     public void retract() {
         linAct.setTargetPosition(Retract);
     }
+    public boolean atTarget() {
+        return Math.abs(linAct.getTargetPosition() - linAct.getCurrentPosition())< 5;
+    }
 }

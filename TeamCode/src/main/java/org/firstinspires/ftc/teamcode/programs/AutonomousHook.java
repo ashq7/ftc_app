@@ -26,11 +26,9 @@ public class AutonomousHook extends LinearOpMode {
         waitForStart();
 
         linAct.extend();
-        sleep(8900);
-
-        linAct.stop();
-
-        sleep(2000);
+        while (!linAct.atTarget()){
+            idle();
+        }
 
         //off hook (west)
         driveTrain.pan(7*Math.PI/4, power);
