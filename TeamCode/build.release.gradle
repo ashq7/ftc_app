@@ -1,8 +1,8 @@
 dependencies {
     implementation project(':FtcRobotController')
-//    implementation project(':navc_ftc')
-    implementation (name: 'RobotCore-release', ext: 'aar')
-    implementation (name: 'Hardware-release', ext: 'aar')
-    implementation (name: 'FtcCommon-release', ext: 'aar')
-    implementation (name:'WirelessP2p-release', ext:'aar')
+    implementation project(':NavxFtc')
+    implementation(name: 'RobotCore-release', ext: 'aar')
+    implementation(name: 'Hardware-release', ext: 'aar')
+    implementation(name: 'FtcCommon-release', ext: 'aar')
+    implementation(name: 'WirelessP2p-release', ext: 'aar')
 }
