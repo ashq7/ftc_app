@@ -34,7 +34,7 @@ public class AutonomousOpposite extends LinearOpMode {
         linAct.extend();
         sleep(9000);
 
-        linAct.stop();
+//        linAct.stop();
 
         sleep(2000);
 

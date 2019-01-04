@@ -66,7 +66,7 @@ public class Teleop extends LinearOpMode {
                 linAct.extend();
             }
             else {
-                linAct.stop();
+//                linAct.stop();
             }
 
             //retract and extend grab arm

@@ -1,0 +1,8 @@
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //compile files('libs/android-support-v4.jar')
+    implementation (name: 'RobotCore-release', ext: 'aar')
+    //compile(name: 'ModernRobotics-release', ext: 'aar')
+    implementation (name: 'Hardware-release', ext: 'aar')
+    //compile(name: 'FtcCommon-release', ext: 'aar')
+}

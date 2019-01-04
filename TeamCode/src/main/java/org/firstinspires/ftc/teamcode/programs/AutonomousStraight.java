@@ -43,7 +43,7 @@ public class AutonomousStraight extends LinearOpMode{
         //lowering robot using Linear Actuator
         linAct.extend();
         sleep(8800);
-        linAct.stop();
+//        linAct.stop();
 
         //pause
         sleep(2000);

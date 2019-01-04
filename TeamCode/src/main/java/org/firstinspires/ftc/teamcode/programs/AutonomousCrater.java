@@ -40,7 +40,7 @@ public class AutonomousCrater extends LinearOpMode {
         //lowering robot using Linear Actuator
         linAct.extend();
         sleep(8500);
-        linAct.stop();
+//        linAct.stop();
 
         //pause
         sleep(2000);
