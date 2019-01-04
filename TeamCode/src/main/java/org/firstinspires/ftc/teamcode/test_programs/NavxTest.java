@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name="NavxTest", group="Test")
 public class NavxTest extends LinearOpMode {
+    // Example importing Navx Code
     @Override
     public void runOpMode() {
         AHRS navx = AHRS.getInstance(hardwareMap.deviceInterfaceModule.get("dim"), 0, AHRS.DeviceDataType.kProcessedData);
