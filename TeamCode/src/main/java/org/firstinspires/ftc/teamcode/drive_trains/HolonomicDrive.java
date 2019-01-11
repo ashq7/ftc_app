@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.drive_trains;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -13,15 +15,28 @@ public class HolonomicDrive {
     public DcMotor SW;
     public DcMotor SE;
 
+    private Thread driveThread;
+
     public HardwareMap hardwareMap;
 
     DcMotor.RunMode encMode = DcMotor.RunMode.RUN_USING_ENCODER;
     DcMotor.RunMode dumbMode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 
-    public HolonomicDrive (HardwareMap HWMap){
-        hardwareMap = HWMap;
+    public HolonomicDrive (final LinearOpMode parent){
+        hardwareMap = parent.hardwareMap;
 
+        driveThread = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                // check opModeIsActive()
+                while (parent.opModeIsActive()) {
+                    
+                }
+            }
+        };
     }
+
     public void init () {
         NW = hardwareMap.dcMotor.get("NW");
         NW.setMode(dumbMode);
@@ -42,7 +57,10 @@ public class HolonomicDrive {
         SE.setMode(dumbMode);
         SE.setDirection(DcMotor.Direction.FORWARD);
         SE.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        driveThread.start();
     }
+
     public void pan(double theta, double power) {
         //This is the pan function. If it is given an angle, it will move the robot at that angle.
         if (power <= 1 && power >= -1) {
