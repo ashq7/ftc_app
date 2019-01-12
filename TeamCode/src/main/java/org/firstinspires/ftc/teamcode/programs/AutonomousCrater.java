@@ -21,7 +21,7 @@ public class AutonomousCrater extends LinearOpMode {
     public void runOpMode () throws InterruptedException {
         //allocation and initialization
         linAct = new LinAct(hardwareMap);
-        driveTrain = new HolonomicDrive(hardwareMap);
+        driveTrain = new HolonomicDrive(this);
         grabArm = new GrabArm(hardwareMap);
         linAct.init();
         driveTrain.init();

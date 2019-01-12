@@ -19,7 +19,7 @@ public class AutonomousHook extends LinearOpMode {
     @Override
     public void runOpMode () throws InterruptedException {
         linAct = new LinAct(hardwareMap);
-        driveTrain = new HolonomicDrive(hardwareMap);
+        driveTrain = new HolonomicDrive(this);
         linAct.init();
         driveTrain.init();
 

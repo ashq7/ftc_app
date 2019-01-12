@@ -21,7 +21,7 @@ public class AutonomousOpposite extends LinearOpMode {
     @Override
     public void runOpMode () throws InterruptedException {
         linAct = new LinAct(hardwareMap);
-        driveTrain = new HolonomicDrive(hardwareMap);
+        driveTrain = new HolonomicDrive(this);
         grabArm = new GrabArm(hardwareMap);
         linAct.init();
         driveTrain.init();

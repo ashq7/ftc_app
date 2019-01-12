@@ -10,7 +10,7 @@ public class MoveRight extends LinearOpMode {
     @Override
     public void runOpMode () {
         HolonomicDrive Drivetrain;
-        Drivetrain = new HolonomicDrive(hardwareMap);
+        Drivetrain = new HolonomicDrive(this);
         Drivetrain.init();
 
         waitForStart();
