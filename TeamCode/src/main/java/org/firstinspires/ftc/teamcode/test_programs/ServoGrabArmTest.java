@@ -12,14 +12,14 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 /**
  * Created by AshQuinn on 12/8/18.
  */
-@TeleOp (name="ServoTest")
-public class ServoLinActTest extends LinearOpMode {
+@TeleOp (name="ServoGrabArmTest", group = "Test")
+public class ServoGrabArmTest extends LinearOpMode {
     public CRServo SmallLinAct;
     double Power = 0.5;
 
     @Override
     public void runOpMode() {
-        SmallLinAct = hardwareMap.crservo.get("SmallLinAct");
+        SmallLinAct = hardwareMap.crservo.get("grabArmRight");
         waitForStart();
         while (opModeIsActive()) {
             if (gamepad1.a) {

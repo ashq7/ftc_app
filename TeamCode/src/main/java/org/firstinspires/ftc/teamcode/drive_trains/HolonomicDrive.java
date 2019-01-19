@@ -5,6 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by AshQuinn on 9/22/18.
  */
@@ -14,6 +17,8 @@ public class HolonomicDrive {
     public DcMotor NE;
     public DcMotor SW;
     public DcMotor SE;
+    public DcMotor positionEncoderX;
+    public DcMotor positionEncoderY;
 
     private Thread driveThread;
 
@@ -21,6 +26,9 @@ public class HolonomicDrive {
 
     DcMotor.RunMode encMode = DcMotor.RunMode.RUN_USING_ENCODER;
     DcMotor.RunMode dumbMode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
+
+    public double targetX = 0;
+    public double targetY = 0;
 
     public HolonomicDrive (final LinearOpMode parent){
         hardwareMap = parent.hardwareMap;
@@ -30,8 +38,47 @@ public class HolonomicDrive {
             public void run() {
                 super.run();
                 // check opModeIsActive()
+                LinkedList<Double> velocitiesX = new LinkedList();
+                LinkedList<Double> velocitiesY = new LinkedList();
+                for (int i = 0; i<5; i++){
+                    velocitiesX.push(new Double(0));
+                    velocitiesY.push(new Double(0));
+
+                }
+
+                int previousX = positionEncoderX.getCurrentPosition();
+                int previousY = positionEncoderY.getCurrentPosition();
+
+                long previousTime = System.currentTimeMillis();
+
+
                 while (parent.opModeIsActive()) {
-                    
+                    long nowTime = System.currentTimeMillis();
+                    long diffTime = nowTime-previousTime;
+
+                    int nowX = positionEncoderX.getCurrentPosition();
+                    int diffX = nowX-previousX;
+
+                    int nowY = positionEncoderY.getCurrentPosition();
+                    int diffY = nowY-previousY;
+
+                    Double currVelX = new Double(ticksToMeters(diffX)/(diffTime/1000));
+                    Double currVelY = new Double(ticksToMeters(diffY)/(diffTime/1000));
+
+                    velocitiesX.remove();
+                    velocitiesX.push(currVelX);
+                    velocitiesY.remove();
+                    velocitiesY.push(currVelY);
+
+                    double avgVelX = 0;
+                    double avgVelY = 0;
+
+                    for (int i = 0; i<5; i++){
+                        avgVelX += velocitiesX.get(i);
+                        avgVelY += velocitiesY.get(i);
+                    }
+                    avgVelX /= 5;
+                    avgVelY /= 5;
                 }
             }
         };
@@ -58,6 +105,10 @@ public class HolonomicDrive {
         SE.setDirection(DcMotor.Direction.FORWARD);
         SE.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        positionEncoderX = hardwareMap.dcMotor.get("positionEncoderX");
+
+        positionEncoderY = hardwareMap.dcMotor.get("positionEncoderY");
+
         driveThread.start();
     }
 
@@ -81,6 +132,10 @@ public class HolonomicDrive {
             SW.setPower(Math.sin(theta));
         }
     }
+
+    public void setTarget (double deltaX, double deltaY){
+
+    }
     public void turn (double power){
         NE.setPower(power);
         SE.setPower(power);
@@ -92,5 +147,9 @@ public class HolonomicDrive {
         SE.setPower(0);
         NW.setPower(0);
         SW.setPower(0);
+    }
+
+    private double ticksToMeters(int ticks){
+        return ticks*((3*0.0254*Math.PI)/1000);
     }
 }
