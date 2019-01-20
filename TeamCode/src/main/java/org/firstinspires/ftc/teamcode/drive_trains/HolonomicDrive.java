@@ -62,8 +62,8 @@ public class HolonomicDrive {
                     int nowY = positionEncoderY.getCurrentPosition();
                     int diffY = nowY-previousY;
 
-                    Double currVelX = new Double(ticksToMeters(diffX)/(diffTime/1000));
-                    Double currVelY = new Double(ticksToMeters(diffY)/(diffTime/1000));
+                    Double currVelX = new Double(ticksToMeters(diffX)/(diffTime/1000.0));
+                    Double currVelY = new Double(ticksToMeters(diffY)/(diffTime/1000.0));
 
                     velocitiesX.remove();
                     velocitiesX.push(currVelX);
@@ -79,6 +79,23 @@ public class HolonomicDrive {
                     }
                     avgVelX /= 5;
                     avgVelY /= 5;
+
+                    /**
+                     * General structure for checking your position
+                     * Use the gyroscope to get your heading
+                    
+                    if (not in target position) {
+                        newAngle = arctan(y differential, x differential) - heading
+
+                        // Here, you can make yourself move slower or faster depending on how close you are
+                        // Or, simply just use a pre-defined power (make a class variable at the top for this)
+                        newPower = clamp(3 feet / distance from target, 0, 1.0) + slowest desired speed
+
+                        pan(newAngle, newPower);
+                    } else {
+                        stop();
+                    }
+                     */
                 }
             }
         };
