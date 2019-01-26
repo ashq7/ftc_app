@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Manipulators;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -10,14 +11,14 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 
 public class GrabArm {
-    public DcMotor liftArm; //arm to lift the grabbers
-    public Servo grabber;
+    public DcMotor liftArm; //arm to lift the ball bucket
+    public CRServo bucketWheel; //wheel that rolls in balls
 
-    private double raisePower = 0.4;
-    private double lowerPower = -0.4;
+    private double raisePower = -0.6;
+    private double lowerPower = 0.4;
 
-    private double open = 0.4;
-    private double closed = 1;
+    /*private double open = 0.4;
+    private double closed = 1;*/
 
     private HardwareMap HWMap;
 
@@ -26,9 +27,9 @@ public class GrabArm {
     }
 
     public void init (){
-        grabber = HWMap.servo.get("grabArmRight");
+        bucketWheel = HWMap.crservo.get("bucketWheel");
         liftArm = HWMap.dcMotor.get("liftArm");
-        initial();
+        //initial();
     }
 
     public void raise () {
@@ -45,21 +46,25 @@ public class GrabArm {
 
     public void grab() {
 //       Grabs a block
-        grabber.setPosition(closed);
+        bucketWheel.setPower(1);
     }
 
     public void release() {
         //Releases the block
-        grabber.setPosition(open);
+        bucketWheel.setPower(-1);
 
     }
-    public void initial(){
+
+    public void stop(){
+        bucketWheel.setPower(0);
+    }
+    /*public void initial(){
         //initialize position to fit in 18 inches
-        grabber.setPosition(0);
+        bucketWheel.setPosition(0);
     }
 
     public void midway(){
-        grabber.setPosition(0.2);
-    }
+        bucketWheel.setPosition(0.2);
+    }*/
 
 }

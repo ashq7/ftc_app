@@ -30,7 +30,7 @@ public class AutonomousCrater extends LinearOpMode {
         waitForStart();
 
         //grab arm servo closes around team marker
-        grabArm.midway();
+        //grabArm.midway();
 
         //lift grab arm to avoid drag
         grabArm.raise();

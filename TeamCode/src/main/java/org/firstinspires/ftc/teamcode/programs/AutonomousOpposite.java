@@ -29,7 +29,7 @@ public class AutonomousOpposite extends LinearOpMode {
 
         waitForStart();
 
-        grabArm.midway();
+        //grabArm.midway();
 
         linAct.extend();
         sleep(9000);

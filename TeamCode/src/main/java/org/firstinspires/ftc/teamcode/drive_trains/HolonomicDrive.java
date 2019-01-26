@@ -17,8 +17,8 @@ public class HolonomicDrive {
     public DcMotor NE;
     public DcMotor SW;
     public DcMotor SE;
-    public DcMotor positionEncoderX;
-    public DcMotor positionEncoderY;
+    //public DcMotor positionEncoderX;
+    //public DcMotor positionEncoderY;
 
     private Thread driveThread;
 
@@ -46,13 +46,13 @@ public class HolonomicDrive {
 
                 }
 
-                int previousX = positionEncoderX.getCurrentPosition();
-                int previousY = positionEncoderY.getCurrentPosition();
+                //int previousX = positionEncoderX.getCurrentPosition();
+                //int previousY = positionEncoderY.getCurrentPosition();
 
                 long previousTime = System.currentTimeMillis();
 
 
-                while (parent.opModeIsActive()) {
+                /*while (parent.opModeIsActive()) {
                     long nowTime = System.currentTimeMillis();
                     long diffTime = nowTime-previousTime;
 
@@ -95,8 +95,8 @@ public class HolonomicDrive {
                     } else {
                         stop();
                     }
-                     */
-                }
+
+                }*/
             }
         };
     }
@@ -122,9 +122,9 @@ public class HolonomicDrive {
         SE.setDirection(DcMotor.Direction.FORWARD);
         SE.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        positionEncoderX = hardwareMap.dcMotor.get("positionEncoderX");
+        //positionEncoderX = hardwareMap.dcMotor.get("positionEncoderX");
 
-        positionEncoderY = hardwareMap.dcMotor.get("positionEncoderY");
+        //positionEncoderY = hardwareMap.dcMotor.get("positionEncoderY");
 
         driveThread.start();
     }

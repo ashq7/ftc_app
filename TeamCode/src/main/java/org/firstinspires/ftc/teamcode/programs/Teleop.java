@@ -71,10 +71,10 @@ public class Teleop extends LinearOpMode {
 
             //retract and extend grab arm
             if (gamepad1.right_bumper){
-                grabArm.lower();
+                grabArm.raise();
             }
             else if (gamepad1.left_bumper){
-                grabArm.raise();
+                grabArm.lower();
             }
             else {
                 grabArm.stopLiftArm();
@@ -87,7 +87,11 @@ public class Teleop extends LinearOpMode {
             else if (gamepad1.b){
                 grabArm.release();
             }
+            else {
+                grabArm.stop();
+            }
         }
+
     }
 
 
