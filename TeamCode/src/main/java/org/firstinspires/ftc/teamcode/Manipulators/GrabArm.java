@@ -11,8 +11,12 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 
 public class GrabArm {
+    DcMotor.RunMode encMode = DcMotor.RunMode.RUN_USING_ENCODER;
     public DcMotor liftArm; //arm to lift the ball bucket
     public CRServo bucketWheel; //wheel that rolls in balls
+
+    //RUN__USING_ENCODER;
+    //where do I put this?
 
     private double raisePower = -0.6;
     private double lowerPower = 0.4;
@@ -22,8 +26,10 @@ public class GrabArm {
 
     private HardwareMap HWMap;
 
+
     public GrabArm (HardwareMap newHWMap) {
         HWMap = newHWMap;
+
     }
 
     public void init (){
