@@ -14,6 +14,10 @@ public class GrabArm {
     DcMotor.RunMode encMode = DcMotor.RunMode.RUN_USING_ENCODER;
     public DcMotor liftArm; //arm to lift the ball bucket
     public CRServo bucketWheel; //wheel that rolls in balls
+    public CRServo pin;
+    int Ground = 0;
+    int Dump = 400;
+    int Collect = 1000;
 
     //RUN__USING_ENCODER;
     //where do I put this?
@@ -34,11 +38,28 @@ public class GrabArm {
 
     public void init (){
         bucketWheel = HWMap.crservo.get("bucketWheel");
+        pin = HWMap.crservo.get("pin");
         liftArm = HWMap.dcMotor.get("liftArm");
+        liftArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Ground = liftArm.getCurrentPosition();
+        Dump = Ground + Dump;
+        Collect = Ground + Collect;
         //initial();
     }
 
-    public void raise () {
+    public void ground (){
+        liftArm.setTargetPosition(Ground);
+    }
+
+    public void dump (){
+        liftArm.setTargetPosition(Dump);
+    }
+
+    public void collect (){
+        liftArm.setTargetPosition(Collect);
+    }
+
+    /*public void raise () {
         liftArm.setPower(raisePower);
     }
 
@@ -48,7 +69,7 @@ public class GrabArm {
 
     public void stopLiftArm (){
         liftArm.setPower(0);
-    }
+    }*/
 
     public void grab() {
 //       Grabs a block
