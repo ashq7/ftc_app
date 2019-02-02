@@ -90,6 +90,10 @@ public class Teleop extends LinearOpMode {
                 grabArm.stop();
             }
 
+            if (gamepad1.dpad_down){
+                grabArm.pinRelease();
+                sleep(250);
+            }
             if (gamepad1.dpad_left){
                 grabArm.ground();
             }

@@ -33,9 +33,9 @@ public class AutonomousCrater extends LinearOpMode {
         //grabArm.midway();
 
         //lift grab arm to avoid drag
-        grabArm.raise();
+        //grabArm.raise();
         sleep(500);
-        grabArm.stopLiftArm();
+        //grabArm.stopLiftArm();
 
         //lowering robot using Linear Actuator
         linAct.extend();
@@ -61,9 +61,9 @@ public class AutonomousCrater extends LinearOpMode {
         driveTrain.stop();
 
         //lower grabber
-        grabArm.lower();
+        //grabArm.lower();
         sleep(500);
-        grabArm.stopLiftArm();
+        //grabArm.stopLiftArm();
 
         //open grabber
         grabArm.release();

@@ -15,6 +15,7 @@ public class GrabArm {
     public DcMotor liftArm; //arm to lift the ball bucket
     public CRServo bucketWheel; //wheel that rolls in balls
     public CRServo pin;
+    double power = 0.25;
     int Ground = 0;
     int Dump = 400;
     int Collect = 1000;
@@ -44,6 +45,8 @@ public class GrabArm {
         Ground = liftArm.getCurrentPosition();
         Dump = Ground + Dump;
         Collect = Ground + Collect;
+        ground();
+        liftArm.setPower(0.6);
         //initial();
     }
 
@@ -70,6 +73,14 @@ public class GrabArm {
     public void stopLiftArm (){
         liftArm.setPower(0);
     }*/
+
+    public void pinRelease () {
+        pin.setPower(power);
+    }
+
+    public void pinStop (){
+        pin.setPower(0);
+    }
 
     public void grab() {
 //       Grabs a block
