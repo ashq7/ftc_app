@@ -17,8 +17,9 @@ public class GrabArm {
     public CRServo pin;
     double power = 0.25;
     int Ground = 0;
-    int Dump = 400;
-    int Collect = 1000;
+    int Adjust = 300;
+    int Dump = 1800;
+    int Collect = 3000;
 
     //RUN__USING_ENCODER;
     //where do I put this?
@@ -43,10 +44,11 @@ public class GrabArm {
         liftArm = HWMap.dcMotor.get("liftArm");
         liftArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Ground = liftArm.getCurrentPosition();
+        Adjust = Ground + Adjust;
         Dump = Ground + Dump;
         Collect = Ground + Collect;
         ground();
-        liftArm.setPower(0.6);
+        liftArm.setPower(0.25);
         //initial();
     }
 
@@ -60,6 +62,9 @@ public class GrabArm {
 
     public void collect (){
         liftArm.setTargetPosition(Collect);
+    }
+    public void adjust (){
+        liftArm.setTargetPosition(Adjust);
     }
 
     /*public void raise () {

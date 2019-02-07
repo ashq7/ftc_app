@@ -34,7 +34,7 @@ public class Teleop extends LinearOpMode {
             double leftX = gamepad1.left_stick_x;
             double leftY = gamepad1.left_stick_y;
             double rightX = gamepad1.right_stick_x;
-
+            /*
             //Define angle for pan function by using trigonometry to calculate it from joystick
             double theta = -Math.PI / 4 + Math.atan2(-leftY, -leftX);
             //Define power for pan function by using math to calculate the length of the hypotenuse between the x and y axes
@@ -56,8 +56,11 @@ public class Teleop extends LinearOpMode {
             }
             else {
                 driveTrain.stop();
-            }
-
+            }*/
+            driveTrain.NE.setPower(powerScale*(leftY+leftX+rightX));
+            driveTrain.SW.setPower(powerScale*(leftY+leftX-rightX));
+            driveTrain.SE.setPower(powerScale*(leftY-leftX+rightX));
+            driveTrain.NW.setPower(powerScale*(leftY-leftX-rightX));
             //retract and extend Linear Actuator, the rover lifter
             if (gamepad1.y) {
                 linAct.retract();
@@ -66,7 +69,7 @@ public class Teleop extends LinearOpMode {
                 linAct.extend();
             }
             else {
-//                linAct.stop();
+                linAct.stop();
             }
 
             //retract and extend grab arm
@@ -92,8 +95,11 @@ public class Teleop extends LinearOpMode {
 
             if (gamepad1.dpad_down){
                 grabArm.pinRelease();
-                sleep(250);
             }
+            else {
+                grabArm.pinStop();
+            }
+
             if (gamepad1.dpad_left){
                 grabArm.ground();
             }

@@ -42,14 +42,18 @@ public class AutonomousStraight extends LinearOpMode{
 
         //lowering robot using Linear Actuator
         linAct.extend();
-        sleep(8800);
-//        linAct.stop();
+        sleep(8000);
+        linAct.stop();
 
         //pause
         sleep(2000);
 
         //drive off hook (west)
-        driveTrain.pan(7*Math.PI/4, power);
+        //driveTrain.pan(3*Math.PI/4, power);
+        driveTrain.NE.setPower(-.5);
+        driveTrain.SW.setPower(-.5);
+        driveTrain.SE.setPower(.5);
+        driveTrain.NW.setPower(.5);
         sleep(500);
         driveTrain.stop();
 
@@ -59,7 +63,7 @@ public class AutonomousStraight extends LinearOpMode{
 
 
         //towards corner - either corner goal or crater (north)
-        driveTrain.pan(Math.PI/4, power);
+        driveTrain.pan(5*Math.PI/4, power);
         sleep (5000);
         driveTrain.stop();
 

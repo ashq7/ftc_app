@@ -18,18 +18,24 @@ public class LinAct {
     }
     public void init () {
         linAct = hardwareMap.dcMotor.get("linAct");
-        linAct.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        linAct.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Retract = linAct.getCurrentPosition();
         Extend = Retract + Extend;
-        retract();
-        linAct.setPower(Power);
+        //retract();
+        //linAct.setPower(Power);
     }
 
     public void extend() {
-        linAct.setTargetPosition(Extend);
+        linAct.setPower(Power);
+        //linAct.setTargetPosition(Extend);
     }
     public void retract() {
-        linAct.setTargetPosition(Retract);
+        //linAct.setTargetPosition(Retract);
+        linAct.setPower(-Power);
+    }
+
+    public void stop(){
+        linAct.setPower(0);
     }
     public boolean atTarget() {
         return Math.abs(linAct.getTargetPosition() - linAct.getCurrentPosition())< 5;
