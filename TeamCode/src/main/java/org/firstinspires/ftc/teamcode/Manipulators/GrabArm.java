@@ -21,9 +21,6 @@ public class GrabArm {
     int Dump = 1800;
     int Collect = 3000;
 
-    //RUN__USING_ENCODER;
-    //where do I put this?
-
     private double raisePower = -0.6;
     private double lowerPower = 0.4;
 

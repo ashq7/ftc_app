@@ -31,7 +31,13 @@ public class AutonomousHook extends LinearOpMode {
         }
 
         //off hook (west)
-        driveTrain.pan(7*Math.PI/4, power);
+        //driveTrain.pan(7*Math.PI/4, power);
+        driveTrain.NE.setPower(-.5);
+        driveTrain.SW.setPower(-.5);
+        driveTrain.SE.setPower(.5);
+        driveTrain.NW.setPower(.5);
+        sleep(500);
+        driveTrain.stop();
         sleep(500);
 
         driveTrain.stop();
