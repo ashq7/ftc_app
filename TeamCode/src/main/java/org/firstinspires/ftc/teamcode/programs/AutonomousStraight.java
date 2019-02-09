@@ -42,7 +42,7 @@ public class AutonomousStraight extends LinearOpMode{
 
         //lowering robot using Linear Actuator
         linAct.extend();
-        sleep(8000);
+        sleep(8500);
         linAct.stop();
 
         //pause
@@ -54,7 +54,7 @@ public class AutonomousStraight extends LinearOpMode{
         driveTrain.SW.setPower(-.5);
         driveTrain.SE.setPower(.5);
         driveTrain.NW.setPower(.5);
-        sleep(500);
+        sleep(1000);
         driveTrain.stop();
 
         //pause
@@ -74,9 +74,10 @@ public class AutonomousStraight extends LinearOpMode{
 
         //open grabber
         grabArm.release();
+        sleep(500);
 
         //pan backwards to deploy marker
-        driveTrain.pan(5*Math.PI/4, power);
+        /*driveTrain.pan(5*Math.PI/4, power);
         sleep(1000);
         driveTrain.stop();
 

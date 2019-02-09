@@ -17,9 +17,9 @@ public class GrabArm {
     public CRServo pin;
     double power = 0.25;
     int Ground = 0;
-    int Adjust = 300;
+    int Adjust = 2500;
     int Dump = 1800;
-    int Collect = 3000;
+    int Collect = 2700;
 
     private double raisePower = -0.6;
     private double lowerPower = 0.4;
