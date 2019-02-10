@@ -32,40 +32,41 @@ public class AutonomousStraight extends LinearOpMode{
 
         waitForStart();
 
-        //grab arm servo closes around team marker
-        //grabArm.midway();
-
-        //lift grab arm to avoid drag
-        //grabArm.raise();
-        sleep(500);
-        //grabArm.stopLiftArm();
-
         //lowering robot using Linear Actuator
         linAct.extend();
-        sleep(8500);
+        sleep(8000);
         linAct.stop();
 
         //pause
         sleep(2000);
 
         //drive off hook (west)
+        driveTrain.NW.setPower(.25);
+        driveTrain.NE.setPower(-.25);
+        driveTrain.SW.setPower(-.25);
+        driveTrain.SE.setPower(.25);
+
         //driveTrain.pan(3*Math.PI/4, power);
-        driveTrain.NE.setPower(-.5);
-        driveTrain.SW.setPower(-.5);
-        driveTrain.SE.setPower(.5);
-        driveTrain.NW.setPower(.5);
-        sleep(1000);
+
+        sleep(400);
         driveTrain.stop();
 
         //pause
         sleep(500);
 
+        //drive towards corner (south)
+        /*driveTrain.NE.setPower(.25);
+        driveTrain.SW.setPower(-.25);
+        driveTrain.SE.setPower(.25);
+        driveTrain.NW.setPower(-.25);
 
+        sleep(3000);
+        driveTrain.stop();*/
 
         //towards corner - either corner goal or crater (north)
-        driveTrain.pan(5*Math.PI/4, power);
+        /*driveTrain.pan(5*Math.PI/4, power);
         sleep (5000);
-        driveTrain.stop();
+        driveTrain.stop();/*
 
         //lower grabber
         //grabArm.lower();

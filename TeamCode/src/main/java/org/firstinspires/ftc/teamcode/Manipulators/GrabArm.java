@@ -18,8 +18,8 @@ public class GrabArm {
     double power = 0.25;
     int Ground = 0;
     int Adjust = 2500;
-    int Dump = 1800;
-    int Collect = 2700;
+    int Dump = 1700;
+    int Collect = 2600;
 
     private double raisePower = -0.6;
     private double lowerPower = 0.4;
@@ -32,7 +32,6 @@ public class GrabArm {
 
     public GrabArm (HardwareMap newHWMap) {
         HWMap = newHWMap;
-
     }
 
     public void init (){

@@ -73,14 +73,14 @@ public class Teleop extends LinearOpMode {
             }
 
             //retract and extend grab arm
-            if (gamepad1.right_bumper){
+            /*if (gamepad1.right_bumper){
                 grabArm.liftArm.setTargetPosition(grabArm.liftArm.getCurrentPosition() + 1);
                 //sleep(3);
             }
             else if (gamepad1.left_bumper){
                 grabArm.liftArm.setTargetPosition(grabArm.liftArm.getCurrentPosition() - 1);
                 //sleep(3);
-            }
+            }*/
 
             //open and close grabbers
             if (gamepad1.a){
@@ -93,7 +93,7 @@ public class Teleop extends LinearOpMode {
                 grabArm.stop();
             }
 
-            if (gamepad1.dpad_down){
+            if (gamepad1.right_bumper){
                 grabArm.pinRelease();
             }
             else {
@@ -109,7 +109,7 @@ public class Teleop extends LinearOpMode {
             else if (gamepad1.dpad_right){
                 grabArm.adjust();
             }
-            else if (gamepad1.right_bumper){
+            else if (gamepad1.dpad_down){
                 grabArm.collect();
             }
         }

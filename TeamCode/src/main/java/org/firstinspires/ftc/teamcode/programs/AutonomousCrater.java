@@ -29,6 +29,71 @@ public class AutonomousCrater extends LinearOpMode {
 
         waitForStart();
 
+        driveTrain.NW.setPower(.25);
+        telemetry.addLine("NW");
+        sleep(2000);
+
+        driveTrain.stop();
+        sleep (500);
+
+        driveTrain.NE.setPower(0.25);
+        telemetry.addLine("NE");
+        sleep(2000);
+
+        driveTrain.stop();
+        sleep (500);
+
+        driveTrain.SW.setPower(0.25);
+        telemetry.addLine("SW");
+        sleep(2000);
+
+        driveTrain.stop();
+        sleep (500);
+
+        driveTrain.SE.setPower(0.25);
+        telemetry.addLine("SE");
+        sleep(2000);
+
+        driveTrain.stop();
+        sleep (500);
+
+        //North
+        driveTrain.NE.setPower(-.25);
+        driveTrain.SW.setPower(-.25);
+        driveTrain.SE.setPower(-.25);
+        driveTrain.NW.setPower(-.25);
+        sleep(2000);
+        driveTrain.stop();
+        sleep (500);
+
+        //South
+        driveTrain.NE.setPower(.25);
+        driveTrain.SW.setPower(.25);
+        driveTrain.SE.setPower(.25);
+        driveTrain.NW.setPower(.25);
+        sleep(2000);
+        driveTrain.stop();
+        sleep (500);
+
+        //East
+        driveTrain.NE.setPower(.25);
+        driveTrain.SW.setPower(.25);
+        driveTrain.SE.setPower(-.25);
+        driveTrain.NW.setPower(-.25);
+        sleep(2000);
+        driveTrain.stop();
+        sleep (500);
+
+        //West
+        driveTrain.NE.setPower(-.25);
+        driveTrain.SW.setPower(-.25);
+        driveTrain.SE.setPower(.25);
+        driveTrain.NW.setPower(.25);
+        sleep(2000);
+        driveTrain.stop();
+        sleep (500);
+
+        /*
         //grab arm servo closes around team marker
         //grabArm.midway();
 
@@ -53,8 +118,6 @@ public class AutonomousCrater extends LinearOpMode {
         //pause
         sleep(500);
 
-
-
         //towards corner - either corner goal or crater (north)
         driveTrain.pan(Math.PI/4, power);
         sleep (5000);
@@ -68,7 +131,7 @@ public class AutonomousCrater extends LinearOpMode {
         //open grabber
         grabArm.release();
 
-        /*//pan backwards to deploy marker
+       //pan backwards to deploy marker
         driveTrain.pan(5*Math.PI/4, power);
         sleep(1000);
         driveTrain.stop();*/
